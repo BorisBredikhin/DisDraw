@@ -14,3 +14,14 @@ canvas {
   width: 100vw;
   height: 100vh;
 }
+
+.cursor {
+  width: 10px;
+  height: 10px;
+  background: #000;
+  
+  --x: 0px;
+  --y: 0px;
+
+  transform: translate(var(--x), var(--y));
+}
