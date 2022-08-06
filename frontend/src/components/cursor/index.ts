@@ -1,3 +1,4 @@
+import { StatusBar } from ".."
 import { Point } from "../../geometry"
 
 export class Cursor {
@@ -5,11 +6,30 @@ export class Cursor {
     private element: HTMLDivElement | null = null
     private ctx: CanvasRenderingContext2D
     private position: Point = new Point(0, 0)
-    public down = false
+    private _down = false
+    private statusElement: HTMLDivElement
 
-    constructor(container: HTMLElement, ctx: CanvasRenderingContext2D) {
+    
+    public get down() : boolean {
+        return this._down;
+    }
+    public set down(v : boolean) {
+        this.statusElement.innerHTML = v?"Опущено":"Поднято"
+        this._down = v;
+    }
+    
+
+    public readonly statusbar: StatusBar
+    
+    constructor(
+        container: HTMLElement,
+        ctx: CanvasRenderingContext2D, 
+        statusbar: StatusBar
+    ) {
         this.container = container
         this.ctx = ctx
+        this.statusbar = statusbar
+        this.statusElement = this.statusbar.add()
     }
 
     createElement() {
