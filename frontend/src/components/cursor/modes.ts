@@ -81,12 +81,13 @@ export class TurtleMode extends CursorMode {
 
     public tick(): void {
         this.cursor.moveDelta(this.speedX*Math.cos(this.angle), this.speedY*Math.sin(this.angle))
-        this.speedX += this.acclrX
-        this.speedY += this.acclrY
+        this.speedX += this.acclrX/100
+        this.speedY += this.acclrY/100
         this.angle += this.acclrAngle
         this._statusBarElement.innerHTML = `Скорость: (${this.speedX}, ${this.speedY})<br>
         Ускорение: (${this.acclrX}, ${this.acclrY}), ${this.acclrAngle} rad<br>
         Угол: ${this.angle}`
+        this.cursor.rotate(this.angle)
     }
 
     public listener(ev: KeyboardEvent): void {
@@ -109,10 +110,10 @@ export class TurtleMode extends CursorMode {
                 this.speedY++
                 break
             case 'Numpad1':
-                this.acclrAngle+=0.1
+                this.acclrAngle-=0.1
                 break
             case 'Numpad3':
-                this.acclrAngle-=0.1
+                this.acclrAngle+=0.1
                 break
             case 'ArrowUp':
                 this.acclrY++

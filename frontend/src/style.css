@@ -16,12 +16,17 @@ canvas {
 }
 
 .cursor {
-  width: 10px;
-  height: 10px;
-  background: #000;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 20px;
+  border-color: transparent transparent transparent #000;
   
   --x: 0px;
   --y: 0px;
+  --angle: 0rad;
 
-  transform: translate(var(--x), var(--y));
+  transform: rotate(var(--angle));
+  top: var(--y);
+  left: var(--x);
 }

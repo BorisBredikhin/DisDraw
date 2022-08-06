@@ -65,4 +65,8 @@ export class Cursor {
     moveDelta(dx: number, dy: number) {
         this.moveTo(this.position.x + dx, this.position.y + dy)
     }
+
+    rotate(angle: number){
+        this.element?.style.setProperty('--angle', `${angle}rad`)
+    }
 }
