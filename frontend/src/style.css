@@ -30,3 +30,9 @@ canvas {
   top: var(--y);
   left: var(--x);
 }
+
+#color {
+  border: 5px solid #000;
+  border-radius: 100%;
+  display: inline-block;
+}

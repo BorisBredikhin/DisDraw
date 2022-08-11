@@ -8,6 +8,7 @@ export class DrawingCanvas {
     private cursor: Cursor
     private cursorMode: CursorMode
     public readonly statusbar: StatusBar
+    private status: HTMLDivElement
 
     constructor(cnv: HTMLCanvasElement, statusbar: StatusBar) {
         this.cnv = cnv
@@ -18,11 +19,24 @@ export class DrawingCanvas {
         this.ctx.strokeStyle = 'black'
 
         this.statusbar = statusbar
+        this.status=this.statusbar.add()
+        this.status.innerHTML =`
+        <div id='color'></div>
+        <button id='save'>Сохранить</button>
+        `
         this.cursor = new Cursor(this.cnv.parentElement!, this.ctx, this.statusbar)
         this.cursor.createElement()
         
         this.cursorMode = new EightDirectionMode(this.cursor, this.statusbar)
         this.cursorMode.setup()
+
+        let btnSave = document.getElementById('save') as HTMLButtonElement
+        btnSave.addEventListener('click', (ev)=>{
+            let link = document.createElement('a')
+            link.download='canvas.png'
+            link.href = this.cnv.toDataURL()
+            link.click()
+        })
 
         setInterval(()=>this.cursorMode.tick(), 200)
     }
