@@ -28,7 +28,20 @@ export abstract class CursorMode {
 }
 
 export class EightDirectionMode extends CursorMode {
-    public speed: number = 1
+    private _speed: number = 1
+    public get speed(): number {
+        return this._speed
+    }
+    public set speed(value: number) {
+        this._speed = value
+        this._statusBarElement.innerHTML  = `Скорость: ${this.speed}`
+    }
+
+    constructor(cursor: Cursor, statusbar: StatusBar) {
+        super(cursor, statusbar)
+
+        this._statusBarElement.innerHTML = `Скорость: ${this.speed}`
+    }
 
     public listener(ev: KeyboardEvent): void {
         switch (ev.code) {
