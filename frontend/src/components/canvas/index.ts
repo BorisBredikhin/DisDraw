@@ -27,7 +27,7 @@ export class DrawingCanvas {
         this.cursor = new Cursor(this.cnv.parentElement!, this.ctx, this.statusbar)
         this.cursor.createElement()
         
-        this.cursorMode = new EightDirectionMode(this.cursor, this.statusbar)
+        this.cursorMode = new TurtleMode(this.cursor, this.statusbar)
         this.cursorMode.setup()
 
         let btnSave = document.getElementById('save') as HTMLButtonElement

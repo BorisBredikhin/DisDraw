@@ -85,7 +85,7 @@ export class EightDirectionMode extends CursorMode {
 }
 
 export class TurtleMode extends CursorMode {
-    public speedX: number = 0
+    public speedX: number = 1
     public speedY: number = 0
     public angle: number = 0
     public acclrX: number = 0
@@ -93,12 +93,12 @@ export class TurtleMode extends CursorMode {
     public acclrAngle: number = 0
 
     public tick(): void {
-        this.cursor.moveDelta(this.speedX*Math.cos(this.angle), this.speedY*Math.sin(this.angle))
-        this.speedX += this.acclrX/100
-        this.speedY += this.acclrY/100
-        this.angle += this.acclrAngle
-        this._statusBarElement.innerHTML = `Скорость: (${this.speedX}, ${this.speedY})<br>
-        Ускорение: (${this.acclrX}, ${this.acclrY}), ${this.acclrAngle} rad<br>
+        // return
+        // this.cursor.moveDelta(this.speedX*Math.cos(this.angle), this.speedY*Math.sin(this.angle))
+        // this.speedX += this.acclrX/100
+        // this.speedY += this.acclrY/100
+        // this.angle += this.acclrAngle
+        this._statusBarElement.innerHTML = `Скорость: ${this.speedX}<br>
         Угол: ${this.angle}`
         this.cursor.rotate(this.angle)
     }
@@ -106,39 +106,19 @@ export class TurtleMode extends CursorMode {
     public listener(ev: KeyboardEvent): void {
         switch (ev.code) {
             case 'Numpad2':
-                this.speedX--
-                this.speedY--
+                this.cursor.moveDelta(-this.speedX*Math.cos(this.angle), -this.speedX*Math.sin(this.angle))
                 break;
             case 'Numpad4':
-                this.angle--
+                this.angle-=0.1
                 break;
             case 'Numpad5':
                 this.cursor.down = !this.cursor.down
                 break
             case 'Numpad6':
-                this.angle++
+                this.angle+=0.1
                 break;
             case 'Numpad8':
-                this.speedX++
-                this.speedY++
-                break
-            case 'Numpad1':
-                this.acclrAngle-=0.1
-                break
-            case 'Numpad3':
-                this.acclrAngle+=0.1
-                break
-            case 'ArrowUp':
-                this.acclrY++
-                break
-            case 'ArrowDown':
-                this.acclrY--
-                break
-            case 'ArrowRight':
-                this.acclrX++
-                break
-            case 'ArrowLeft':
-                this.acclrX--
+                this.cursor.moveDelta(this.speedX*Math.cos(this.angle), this.speedX*Math.sin(this.angle))
                 break
             default:
                 break;
