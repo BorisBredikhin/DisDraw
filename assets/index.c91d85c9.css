@@ -1,0 +1,1 @@
+body{margin:0}#app{position:relative}#app>*{position:absolute}canvas{width:100vw;height:100vh}.cursor{width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #000;--x: 0px;--y: 0px;--angle: 0rad;transform:rotate(var(--angle));top:var(--y);left:var(--x)}#color{border:5px solid #000;border-radius:100%;display:inline-block}
